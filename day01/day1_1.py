@@ -55,7 +55,7 @@ def sumNums(rows:list)->list:
         s+=i
     return s
 
-rows=stripInputRows("AOC_2023\day01\input")
+rows=stripInputRows("input")
 rowsNums=wrapAllRow(rows)
 sum=sumNums(rowsNums)
 print(sum)
