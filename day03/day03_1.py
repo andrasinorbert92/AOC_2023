@@ -22,14 +22,27 @@ def rowWrapper(currRow:str, lastRow:str, nextRow:str)->int:
         if row2 is not None:
             return checkCharIsSymbol(row2[index])
         return False
-        
+    
+    def sumAllNumber(row:str)->int:
+        sum =0
+        number_str=""
+        for i in range(len(row)):
+            if row[i].isnumeric():
+                number_str+=row[i]
+            else:
+                if len(number_str)>0:
+                    sum+=int(number_str)
+                    number_str=""
+        return sum
+    
+    sum_All_number=sumAllNumber(currRow)
     print("------------------------------------")
     print(lastRow)
     print(currRow)
     print(nextRow)
     print("----------------")
     currNum_str=""
-    sum=0
+    sum_has_not_symbol=0
     isNum=False
     hasSymbol=False
     for i in range(len(currRow)):
@@ -47,7 +60,7 @@ def rowWrapper(currRow:str, lastRow:str, nextRow:str)->int:
             
             if i == len(currRow)-1: # last char in row
                 print(currNum_str)
-                sum+=int(currNum_str)
+                sum_has_not_symbol+=int(currNum_str)
                 currNum_str=""
                 isNum=False
             isNum=True
@@ -56,7 +69,7 @@ def rowWrapper(currRow:str, lastRow:str, nextRow:str)->int:
             hasSymbol=checkCharIsSymbol(currRow[i])
             hasSymbol|=checkNeighbourRowsOnIndexIsSymbol(i, lastRow, nextRow)
             if not hasSymbol:
-                sum+=int(currNum_str) # end of the number
+                sum_has_not_symbol+=int(currNum_str) # end of the number
                 print(currNum_str)
                 currNum_str=""
                 isNum=False
@@ -65,9 +78,9 @@ def rowWrapper(currRow:str, lastRow:str, nextRow:str)->int:
             isNum=False
             hasSymbol=False
             currNum_str=""
-    print(sum)
+    print(sum_has_not_symbol)
     print("------------------------------------")
-    return sum
+    return sum_All_number-sum_has_not_symbol
 
 def wrapAllRow(rows:list)->list:
     sum=0
@@ -89,3 +102,5 @@ rows=stripInputRows("day03/input")
 sum=wrapAllRow(rows)
 print(sum)
 #print(sum(nums))
+
+#519345 too low
